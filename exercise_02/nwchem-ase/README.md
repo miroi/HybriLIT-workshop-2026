@@ -2,7 +2,7 @@
 
 ## Objective
 
-This exercise calculates the gas-phase combustion enthalpy of methane using density functional theory (DFT) as implemented in **NWChem**.
+This exercise calculates the gas-phase combustion enthalpy of methane using density functional theory (DFT) as implemented in NWChem.
 
 The calculation employs the B3LYP exchange-correlation functional and the 6-311++G** basis set.
 
@@ -13,25 +13,23 @@ The purpose is to investigate the performance of a conventional hybrid-DFT appro
 The reaction is:
 
 $$
-\mathrm{CH_4(g)+2O_2(g)\rightarrow CO_2(g)+2H_2O(g)}
+\mathrm{CH_4(g)} + 2\,\mathrm{O_2(g)} \rightarrow \mathrm{CO_2(g)} + 2\,\mathrm{H_2O(g)}
 $$
 
 The experimental gas-phase reaction enthalpy at 298.15 K is:
 
 $$
-\Delta_c H^\circ_{\mathrm{exp}}
-=
--802.30\ \mathrm{kJ\,mol^{-1}}
+\Delta_c H^\circ_{\mathrm{exp}} = -802.30\ \mathrm{kJ\,mol^{-1}}
 $$
 
 ## Computational methodology
 
 The calculations are performed using:
 
-- **Electronic-structure program:** NWChem.
-- **Exchange-correlation functional:** B3LYP.
-- **Basis set:** 6-311++G**.
-- **Molecular oxygen:** Triplet electronic state.
+- Electronic-structure program: NWChem.
+- Exchange-correlation functional: B3LYP.
+- Basis set: 6-311++G**.
+- Molecular oxygen: Triplet electronic state.
 
 The molecular energies and geometries are used to evaluate the reaction enthalpy.
 
@@ -40,9 +38,7 @@ The molecular energies and geometries are used to evaluate the reaction enthalpy
 The included NWChem calculation reports:
 
 $$
-\Delta_c H^\circ(298.15\,\mathrm{K})
-=
--750.51\ \mathrm{kJ\,mol^{-1}}
+\Delta_c H^\circ(298.15\ \mathrm{K}) = -750.51\ \mathrm{kJ\,mol^{-1}}
 $$
 
 This differs from the experimental reference by approximately 51.8 kJ mol⁻¹.
@@ -50,7 +46,7 @@ This differs from the experimental reference by approximately 51.8 kJ mol⁻¹.
 The optimized geometries show good agreement with the cited experimental bond lengths:
 
 | Molecule | Bond | Calculated distance (Å) | Experimental reference (Å) |
-|---|---|---:|---:|
+| --- | --- | --- | --- |
 | O₂ (triplet) | O=O | 1.2062 | 1.208 |
 | CO₂ | C=O | 1.1608 | 1.160 |
 | CH₄ | C–H | 1.0908 | — |
@@ -76,19 +72,3 @@ Run the calculation using:
 
 ```bash
 python methane_combustion_nwchem.py
-```
-
-NWChem must be installed and accessible to the ASE calculator.
-
-The saved logfile contains the output of the reference calculation.
-
-## Learning outcomes
-
-This exercise demonstrates:
-
-- The application of hybrid DFT to molecular reaction energetics.
-- The importance of choosing the correct electronic state.
-- The influence of electron-correlation and basis-set errors.
-- The distinction between geometrical and thermochemical accuracy.
-- The comparison of DFT predictions with experimental thermochemical data.
-
