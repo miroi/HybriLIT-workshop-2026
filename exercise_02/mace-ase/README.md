@@ -1,9 +1,8 @@
-
 # Methane Combustion Enthalpy Using MACE and ASE
 
 ## Objective
 
-This exercise calculates the gas-phase combustion enthalpy of methane using the **MACE-MP-0 machine-learning interatomic potential** and the Atomic Simulation Environment (ASE).
+This exercise calculates the gas-phase combustion enthalpy of methane using the MACE-MP-0 machine-learning interatomic potential and the Atomic Simulation Environment (ASE).
 
 The main objective is to evaluate how a machine-learning potential trained on density-functional-theory reference data describes a chemical reaction involving both closed-shell molecules and open-shell molecular oxygen.
 
@@ -14,7 +13,7 @@ The calculation uses the `mace_mp` model rather than MACE-OFF23.
 This choice is important because molecular oxygen has a triplet ground state:
 
 $$
-\mathrm{O_2}: \quad {}^3\Sigma_g^-
+\mathrm{O_2}:\ {}^3\Sigma_g^-
 $$
 
 Standard MACE-OFF23 is designed for closed-shell organic molecules and does not provide the spin-state treatment required for this oxygen reference.
@@ -25,13 +24,7 @@ The calculation also specifies the appropriate spin multiplicity for O₂ when u
 
 ## Computational workflow
 
-The Python script
-
-```text
-methane_combustion_mace.py
-```
-
-performs the calculations required to evaluate the combustion reaction.
+The Python script `methane_combustion_mace.py` performs the calculations required to evaluate the combustion reaction.
 
 The thermochemical analysis considers:
 
@@ -48,17 +41,13 @@ The calculated reaction enthalpy is compared with the experimental gas-phase ref
 The included MACE-MP-0 (medium) calculation gives:
 
 $$
-\Delta_c H^\circ(298.15\,\mathrm{K})
-=
--743.24\ \mathrm{kJ\,mol^{-1}}
+\Delta_c H^\circ(298.15\ \mathrm{K}) = -743.24\ \mathrm{kJ\,mol^{-1}}
 $$
 
 The experimental reference is:
 
 $$
-\Delta_c H^\circ_{\mathrm{exp}}
-=
--802.30\ \mathrm{kJ\,mol^{-1}}
+\Delta_c H^\circ_{\mathrm{exp}} = -802.30\ \mathrm{kJ\,mol^{-1}}
 $$
 
 The difference is approximately 59 kJ mol⁻¹, corresponding to about 7.4% of the experimental value.
@@ -74,7 +63,7 @@ The included analysis discusses the relationship between the MACE-MP-0 predictio
 The harmonic zero-point energy correction reported in the calculation is:
 
 $$
-\Delta\mathrm{ZPE}=+8.83\ \mathrm{kJ\,mol^{-1}}
+\Delta\mathrm{ZPE} = +8.83\ \mathrm{kJ\,mol^{-1}}
 $$
 
 The vibrational analysis also provides an opportunity to examine molecular symmetry and the degeneracy of vibrational modes in CO₂ and CH₄.
@@ -85,17 +74,3 @@ Run the calculation using:
 
 ```bash
 python methane_combustion_mace.py
-```
-
-The script requires ASE and the MACE package, together with the corresponding model checkpoint.
-
-## Learning outcomes
-
-This exercise demonstrates:
-
-- The use of machine-learning potentials for molecular thermochemistry.
-- The importance of electronic spin states in reaction-energy calculations.
-- The relationship between training data and model accuracy.
-- The contribution of vibrational and thermal corrections to reaction enthalpies.
-- The limitations of transferring a computational model between different classes of molecular systems.
-
