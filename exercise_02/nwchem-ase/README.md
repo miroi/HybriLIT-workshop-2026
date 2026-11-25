@@ -49,8 +49,8 @@ The optimized geometries show good agreement with the cited experimental bond le
 | --- | --- | --- | --- |
 | O₂ (triplet) | O=O | 1.2062 | 1.208 |
 | CO₂ | C=O | 1.1608 | 1.160 |
-| CH₄ | C–H | 1.0908 | — |
-| H₂O | O–H | 0.9621 | — |
+| CH₄ | C–H | 1.0908 | 1.086 |
+| H₂O | O–H | 0.9621 | 0.957 |
 
 The calculated bond lengths are close to the corresponding experimental values.
 
