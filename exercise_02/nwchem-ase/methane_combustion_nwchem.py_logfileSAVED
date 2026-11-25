@@ -1,0 +1,32 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_02/nwchem-ase/.python methane_combustion_nwchem.py
+=== NWChem DFT Calculator Initialization ===
+Functional / Basis : B3LYP / 6-311++G**
+MPI Launch Command : mpirun -np 6 nwchem PREFIX.nwi > PREFIX.nwo
+Reaction           : CH4(g) + 2 O2(g) -> CO2(g) + 2 H2O(g)
+Spin Treatment     : Restricted singlet (mult=1) except open-shell triplet O2 (odft, mult=3)
+
+=== ASE Geometry Optimization & Harmonic Vibrations (delta = 0.01 A) ===
+
+[CH4 (singlet)] steps=2  | E_opt=-1102.999374 eV | ZPE=1.2115 eV
+  Internal frequencies (cm^-1): 1340.9, 1340.9, 1340.9, 1558.8, 1558.8, 3022.6, 3126.7, 3126.7, 3126.7
+
+[O2  (triplet)] steps=5  | E_opt=-4091.833122 eV | ZPE=0.1028 eV
+  Internal frequencies (cm^-1): 1632.1
+
+[CO2 (singlet)] steps=6  | E_opt=-5133.398967 eV | ZPE=0.3155 eV
+  Internal frequencies (cm^-1): 656.1, 656.1, 1371.9, 2405.9
+
+[H2O (singlet)] steps=6  | E_opt=-2080.562019 eV | ZPE=0.5846 eV
+  Internal frequencies (cm^-1): 1601.6, 3816.2, 3921.7
+
+=== Relaxed Bond Lengths vs. Experiment ===
+C-H in CH4         : 1.0908 A  (Expt: 1.087 A)
+O=O in O2 (triplet): 1.2062 A  (Expt: 1.208 A)
+C=O in CO2         : 1.1608 A  (Expt: 1.160 A)
+O-H in H2O         : 0.9621 A  (Expt: 0.958 A)
+
+=== Gas-Phase Methane Combustion Summary (NWChem B3LYP/6-311++G**) ===
+Electronic dE_rxn  :  -7.8574 eV  ( -758.12 kJ/mol)
+Zero-Point dZPE    :  +0.0676 eV  (   +6.52 kJ/mol)
+ZPE-Corr dE_0K     :  -7.7898 eV  ( -751.60 kJ/mol)
+Enthalpy dcH_298K  :  -7.7785 eV  ( -750.51 kJ/mol)  [Expt ref: -802.30 kJ/mol]

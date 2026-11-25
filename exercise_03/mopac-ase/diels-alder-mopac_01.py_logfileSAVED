@@ -1,0 +1,21 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_04/mopac-ase/.python diels-alder-mopac_01.py
+=== MOPAC Calculator Initialization ===
+Method             : PM7 (Semi-Empirical NDDO Hamiltonian)
+Reaction           : C4H6(g, 1,3-butadiene) + C2H4(g) -> C6H10(g, cyclohexene)
+Energy Definition  : FINAL HEAT OF FORMATION dHf(298.15 K)
+
+=== Tight Geometry Optimization & MOPAC Heat of Formation ===
+[C4H6  (1,3-butadiene )] steps=20  | dHf_298K= +113.67 kJ/mol
+[C2H4  (ethene        )] steps=9   | dHf_298K=  +57.97 kJ/mol
+[C6H10 (cyclohexene   )] steps=53  | dHf_298K=  -14.06 kJ/mol
+
+=== Relaxed C=C Double Bond Lengths ===
+C=C in 1,3-butadiene : 1.3362 A  (Expt: 1.341 A)
+C=C in ethene        : 1.3298 A  (Expt: 1.339 A)
+C=C in cyclohexene   : 1.3363 A  (Expt: 1.335 A)
+
+=== Diels-Alder Reaction Enthalpy Summary (PM7): C4H6 + C2H4 -> C6H10 ===
+dHf(1,3-butadiene) :  +113.67 kJ/mol  (Expt ref: +110.00 kJ/mol)
+dHf(ethene)        :   +57.97 kJ/mol  (Expt ref:  +52.40 kJ/mol)
+dHf(cyclohexene)   :   -14.06 kJ/mol  (Expt ref:   -4.30 kJ/mol)
+Reaction drH_298K  :  -185.70 kJ/mol  (-1.9246 eV)  [Expt ref: -166.70 kJ/mol]

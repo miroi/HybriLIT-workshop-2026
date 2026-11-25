@@ -1,0 +1,28 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_04/mace-ase/.python diels-alder-mace.py
+/home/milias/miniconda3/envs/molmatmodel/lib/python3.13/site-packages/e3nn/o3/_wigner.py:10: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+=== MACE-OFF23 Potential Initialization ===
+Model Variant      : MACE-OFF23 (medium)
+Compute Device     : cuda (PyTorch 2.5.1.post208)
+Reference Level    : wB97M-D3(BJ)/def2-TZVPPD
+Reaction           : C4H6(g, 1,3-butadiene) + C2H4(g) -> C6H10(g, cyclohexene)
+Using MACE-OFF23 MODEL for MACECalculator with /home/milias/.cache/mace/MACE-OFF23_medium.model
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+/home/milias/miniconda3/envs/molmatmodel/lib/python3.13/site-packages/mace/calculators/mace.py:226: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(f=model_path, map_location=device)
+
+=== Tight Geometry Optimization & Harmonic Vibrations (delta = 0.01 A) ===
+[C4H6  (1,3-butadiene )] steps=17  | E_opt=-4247.523851 eV | ZPE=2.3250 eV
+[C2H4  (ethene        )] steps=9   | E_opt=-2139.831839 eV | ZPE=1.3935 eV
+[C6H10 (cyclohexene   )] steps=63  | E_opt=-6389.347402 eV | ZPE=3.9980 eV
+
+=== Relaxed C=C Double Bond Lengths ===
+C=C in 1,3-butadiene : 1.3278 A  (Expt: 1.341 A)
+C=C in ethene        : 1.3222 A  (Expt: 1.339 A)
+C=C in cyclohexene   : 1.3268 A  (Expt: 1.335 A)
+
+=== Diels-Alder Reaction Enthalpy Summary (MACE-OFF23): C4H6 + C2H4 -> C6H10 ===
+Electronic dE_rxn  :  -1.9917 eV  ( -192.17 kJ/mol)
+Zero-Point dZPE    :  +0.2796 eV  (  +26.97 kJ/mol)
+ZPE-Corr dE_0K     :  -1.7122 eV  ( -165.20 kJ/mol)
+Reaction drH_298K  :  -1.7967 eV  ( -173.35 kJ/mol)  [Expt ref: -166.70 kJ/mol]

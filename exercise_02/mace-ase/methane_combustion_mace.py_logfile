@@ -1,0 +1,39 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_02/mace-ase/.python methane_combustion_mace.py
+/home/milias/miniconda3/envs/molmatmodel/lib/python3.13/site-packages/e3nn/o3/_wigner.py:10: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+=== MACE Potential Initialization ===
+Model Variant      : MACE-MP-0 (medium) + D3 dispersion
+Compute Device     : cuda (PyTorch 2.5.1.post208)
+Reaction           : CH4(g) + 2 O2(g) -> CO2(g) + 2 H2O(g)
+Spin Treatment     : Spin-polarized PBE reference (S=1 for triplet O2 in IdealGasThermo)
+Using Materials Project MACE for MACECalculator with /home/milias/.cache/mace/20231203mace128L1_epoch199model
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+/home/milias/miniconda3/envs/molmatmodel/lib/python3.13/site-packages/mace/calculators/mace.py:226: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(f=model_path, map_location=device)
+Using TorchDFTD3Calculator for D3 dispersion corrections
+
+=== Tight Geometry Optimization & Harmonic Vibrations (delta = 0.01 A) ===
+
+[CH4 (singlet)] steps=3  | E_opt= -23.945820 eV | ZPE=1.1666 eV
+  Internal frequencies (cm^-1): 1194.2, 1194.2, 1194.2, 1392.6, 1392.6, 3009.2, 3147.3, 3147.3, 3147.3
+
+[O2  (triplet)] steps=4  | E_opt=  -9.696549 eV | ZPE=0.0890 eV
+  Internal frequencies (cm^-1): 1419.5
+
+[CO2 (singlet)] steps=3  | E_opt= -22.805005 eV | ZPE=0.3231 eV
+  Internal frequencies (cm^-1): 710.2, 710.2, 1326.3, 2451.1
+
+[H2O (singlet)] steps=6  | E_opt= -14.170072 eV | ZPE=0.5565 eV
+  Internal frequencies (cm^-1): 1599.6, 3590.1, 3734.4
+
+=== Relaxed Bond Lengths vs. Experiment ===
+C-H in CH4         : 1.0931 A  (Expt: 1.087 A)
+O=O in O2 (triplet): 1.2366 A  (Expt: 1.208 A)
+C=O in CO2         : 1.1744 A  (Expt: 1.160 A)
+O-H in H2O         : 0.9730 A  (Expt: 0.958 A)
+
+=== Gas-Phase Methane Combustion Summary (MACE-MP-0): CH4 + 2 O2 -> CO2 + 2 H2O ===
+Electronic dE_rxn  :  -7.8062 eV  ( -753.19 kJ/mol)
+Zero-Point dZPE    :  +0.0915 eV  (   +8.83 kJ/mol)
+ZPE-Corr dE_0K     :  -7.7148 eV  ( -744.36 kJ/mol)
+Enthalpy dcH_298K  :  -7.7032 eV  ( -743.24 kJ/mol)  [Expt ref: -802.30 kJ/mol]

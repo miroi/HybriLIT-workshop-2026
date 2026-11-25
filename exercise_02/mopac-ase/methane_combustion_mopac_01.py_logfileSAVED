@@ -1,0 +1,31 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_02/mopac-ase/.python methane_combustion_mopac_01.py
+=== MOPAC Calculator Initialization ===
+Method             : PM7 (Semi-Empirical NDDO Hamiltonian)
+Reaction           : CH4(g) + 2 O2(g) -> CO2(g) + 2 H2O(g)
+Energy Definition  : FINAL HEAT OF FORMATION dHf(298.15 K)
+Note               : dHf from MOPAC is already a 298.15 K enthalpy;
+                     no ZPE / thermal corrections are added for dcH.
+
+=== Tight Geometry Optimization ===
+[CH4 (singlet)] steps=2  | dHf_298K=  -60.27 kJ/mol
+[O2  (triplet)] steps=5  | dHf_298K=  -38.37 kJ/mol
+[CO2 (singlet)] steps=3  | dHf_298K= -353.61 kJ/mol
+[H2O (singlet)] steps=5  | dHf_298K= -241.83 kJ/mol
+
+=== Gas-Phase Methane Combustion: dHf(298.15 K) ONLY ===
+Species    PM7 dHf (kJ/mol)     Expt dHf (kJ/mol)
+CH4                 -60.27                -74.87
+O2                  -38.37                  0.00
+CO2                -353.61               -393.51
+H2O                -241.83               -241.83
+
+dcH_298K (PM7 dHf, raw O2)     =  -700.27 kJ/mol  (-7.2578 eV)
+dcH_298K (PM7 dHf, dHf(O2)=0)  =  -777.01 kJ/mol  (-8.0532 eV)
+Experimental reference         =  -802.30 kJ/mol
+Error vs. expt (ref)           =   +25.29 kJ/mol
+
+=== Relaxed Bond Lengths vs. Experiment ===
+C-H in CH4         : 1.0852 A  (Expt: 1.087 A)
+O=O in O2 (triplet): 1.1309 A  (Expt: 1.208 A)
+C=O in CO2         : 1.1681 A  (Expt: 1.160 A)
+O-H in H2O         : 0.9553 A  (Expt: 0.958 A)
