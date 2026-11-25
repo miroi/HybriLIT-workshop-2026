@@ -1,0 +1,3 @@
+# Checking NWChem installation
+
+

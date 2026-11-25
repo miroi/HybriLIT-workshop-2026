@@ -1,0 +1,5 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_01/check-nwchem-ase/.python check_nwchem.py
+=== NWChem (B3LYP/6-31G*, np=2) Smoke Test ===
+Status             : PASS
+Total Energy (H2O) : -2079.193471 eV
+Max Force Component: 0.045251 eV/A

@@ -1,0 +1,3 @@
+# Checking ASE-MACE installation
+
+

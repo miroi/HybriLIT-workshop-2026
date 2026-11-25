@@ -1,0 +1,6 @@
+(molmatmodel) milias@DESKTOP-7OTLCGO:~/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_01/check-mopac-ase/.python check_mopac.py
+=== MOPAC (PM7) Smoke Test ===
+Status             : PASS
+dHf(H2O, 298K)     : -2.501942 eV
+Max Force Component: 0.431188 eV/A
+keeping working files
