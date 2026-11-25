@@ -1,235 +1,129 @@
-# Diels–Alder Reaction Enthalpy Using MACE-OFF23
+
+# Diels–Alder Reaction Enthalpy Using MOPAC PM7
 
 ## Objective
 
-This exercise investigates the gas-phase Diels–Alder reaction between 1,3-butadiene and ethene using the MACE-OFF23 machine-learning interatomic potential.
+This exercise calculates the gas-phase reaction enthalpy of the Diels–Alder cycloaddition of 1,3-butadiene and ethene using the semi-empirical **PM7 method** implemented in MOPAC.
 
-The purpose is to evaluate the performance of a machine-learning potential in describing a chemical reaction involving the formation of new carbon–carbon bonds and the transformation of two reactant molecules into a cyclic product.
+The calculations are performed through ASE.
 
-All three molecules involved are closed-shell hydrocarbons:
+The main objective is to evaluate the accuracy of PM7 in predicting the heats of formation of the reactants and product and to investigate how individual molecular-energy errors affect the calculated reaction enthalpy.
 
-- 1,3-Butadiene: C₄H₆.
-- Ethene: C₂H₄.
-- Cyclohexene: C₆H₁₀.
+## Chemical reaction
 
-## Reference reaction enthalpy
-
-The reaction is:
+The reaction considered is:
 
 $$
-\mathrm{C_4H_6(g)} + \mathrm{C_2H_4(g)} \rightarrow \mathrm{C_6H_{10}(g)}
+\mathrm{C_4H_6(g)+C_2H_4(g)\rightarrow C_6H_{10}(g)}
 $$
 
 The experimental gas-phase reaction enthalpy at 298.15 K is:
 
 $$
-\Delta_r H^\circ_{\mathrm{exp}} = -166.70\ \mathrm{kJ\,mol^{-1}}
+\Delta_r H^\circ_{\mathrm{exp}}
+=
+-166.70\ \mathrm{kJ\,mol^{-1}}
 $$
 
-The included MACE-OFF23 (medium) calculation predicts:
+## Computational methodology
+
+The Python script
+
+```text
+diels-alder-mopac_01.py
+```
+
+performs the molecular calculations using MOPAC and ASE.
+
+The calculations provide the heats of formation of:
+
+- 1,3-Butadiene.
+- Ethene.
+- Cyclohexene.
+
+The reaction enthalpy is evaluated according to Hess's law:
 
 $$
-\Delta_r H^\circ_{\mathrm{MACE}} = -173.35\ \mathrm{kJ\,mol^{-1}}
+\Delta_r H^\circ
+=
+\Delta_f H^\circ(\mathrm{C_6H_{10}})
+-
+\Delta_f H^\circ(\mathrm{C_4H_6})
+-
+\Delta_f H^\circ(\mathrm{C_2H_4})
 $$
 
-The deviation from the experimental reference is:
+## Reference results
+
+The included PM7 calculation gives:
 
 $$
-\left|\Delta_r H^\circ_{\mathrm{MACE}} - \Delta_r H^\circ_{\mathrm{exp}}\right| = 6.65\ \mathrm{kJ\,mol^{-1}}
+\Delta_r H^\circ_{\mathrm{PM7}}
+=
+-185.70\ \mathrm{kJ\,mol^{-1}}
 $$
 
-This corresponds to approximately 4.0% of the experimental reaction enthalpy.
-
-## Electronic energy contribution
-
-The calculated electronic reaction energy is:
+Compared with the experimental reference:
 
 $$
-\Delta E_{\mathrm{elec}} = -192.17\ \mathrm{kJ\,mol^{-1}}
+\Delta_r H^\circ_{\mathrm{exp}}
+=
+-166.70\ \mathrm{kJ\,mol^{-1}}
 $$
 
-This contribution reflects the energetic changes associated with the reorganization of the π-bond system and formation of two new C–C σ bonds.
+the calculated reaction is approximately 19.0 kJ mol⁻¹ more exothermic.
 
-The MACE-OFF23 model is based on a high-level organic-molecule training domain that includes reference calculations using ωB97M-D3(BJ)/def2-TZVPPD.
+### Individual heats of formation
 
-The exercise also compares this result with the electronic energy obtained using GFN2-xTB:
+The calculated heats of formation are compared with the experimental reference values:
 
-$$
-\Delta E_{\mathrm{elec}}^{\mathrm{xTB}} = -282.18\ \mathrm{kJ\,mol^{-1}}
-$$
+| Molecule | PM7 (kJ mol⁻¹) | Experimental reference (kJ mol⁻¹) |
+|---|---:|---:|
+| 1,3-Butadiene | +113.67 | +110.00 |
+| Ethene | +57.97 | +52.40 |
+| Cyclohexene | −14.06 | −4.30 |
 
-This comparison illustrates how different computational approximations can produce substantially different electronic reaction energies.
+The deviations in the individual heats of formation accumulate when the reaction enthalpy is calculated.
 
-## Zero-point energy contribution
+The reactant contribution and product contribution therefore both influence the final reaction-energy error.
 
-The zero-point energy correction is:
+## Structural analysis
 
-$$
-\Delta\mathrm{ZPE} = +26.97\ \mathrm{kJ\,mol^{-1}}
-$$
+The optimized structures provide an additional means of assessing the PM7 description of the molecules.
 
-The correction reflects the change in vibrational zero-point energy when two reactant molecules form a single cyclic product.
+The saved calculation results indicate C=C bond lengths in the approximate range of 1.330–1.336 Å.
 
-The formation of the ring changes the number and character of the vibrational modes, particularly the low-frequency molecular motions associated with translation, rotation, and ring deformation.
-
-After the zero-point energy correction, the calculated reaction energy at 0 K is:
-
-$$
-\Delta E_{0K} = -165.20\ \mathrm{kJ\,mol^{-1}}
-$$
-
-## Thermal enthalpy contribution
-
-The thermal contribution between 0 and 298.15 K is:
-
-$$
-\Delta H_{\mathrm{thermal}} = -8.15\ \mathrm{kJ\,mol^{-1}}
-$$
-
-This contribution includes the changes in translational, rotational, and vibrational enthalpy associated with the conversion of two gas-phase molecules into one product molecule.
-
-Combining the electronic, zero-point, and thermal contributions gives:
-
-$$
-\Delta_r H^\circ(298.15\ \mathrm{K}) = \Delta E_{\mathrm{elec}} + \Delta\mathrm{ZPE} + \Delta H_{\mathrm{thermal}} = -192.17 + 26.97 - 8.15 = -173.35\ \mathrm{kJ\,mol^{-1}}
-$$
-
-## Structural analysis: C=C bond lengths
-
-The optimized molecular structures provide additional information about the electronic structure of the reactants and product.
-
-The calculated C=C bond lengths are:
-
-| Molecule | C=C bond length (Å) |
-| --- | --- |
-| 1,3-Butadiene | 1.3278 |
-| Cyclohexene | 1.3268 |
-| Ethene | 1.3222 |
-
-The slightly elongated C=C bond in 1,3-butadiene is associated with π-electron conjugation across the carbon framework.
-
-The comparison illustrates how molecular geometry reflects differences in electronic delocalization.
+This comparison illustrates that reasonable molecular geometries do not necessarily imply equally accurate reaction enthalpies.
 
 ## Execution
 
 Run the calculation using:
 
 ```bash
-python diels-alder-mace.py# Diels–Alder Reaction Enthalpy Using MACE-OFF23
+python diels-alder-mopac_01.py
+```
 
-## Objective
+MOPAC must be installed and accessible through the ASE calculator.
 
-This exercise investigates the gas-phase Diels–Alder reaction between 1,3-butadiene and ethene using the MACE-OFF23 machine-learning interatomic potential.
+## Saved geometries
 
-The purpose is to evaluate the performance of a machine-learning potential in describing a chemical reaction involving the formation of new carbon–carbon bonds and the transformation of two reactant molecules into a cyclic product.
+The directory
 
-All three molecules involved are closed-shell hydrocarbons:
+```text
+geometries_saved/
+```
 
-- 1,3-Butadiene: C₄H₆.
-- Ethene: C₂H₄.
-- Cyclohexene: C₆H₁₀.
+contains optimized molecular structures and ASE trajectories for the reactants and product.
 
-## Reference reaction enthalpy
+These files can be used to inspect the optimized geometries and visualize the molecular structures.
 
-The reaction is:
+## Learning outcomes
 
-$$
-\mathrm{C_4H_6(g)} + \mathrm{C_2H_4(g)} \rightarrow \mathrm{C_6H_{10}(g)}
-$$
+This exercise demonstrates:
 
-The experimental gas-phase reaction enthalpy at 298.15 K is:
+- Calculation of reaction enthalpies from heats of formation.
+- Application of semi-empirical quantum chemistry to organic reactions.
+- Analysis of errors in individual molecular thermochemical properties.
+- Comparison of geometrical and energetic accuracy.
+- Evaluation of computational predictions against experimental reference data.
 
-$$
-\Delta_r H^\circ_{\mathrm{exp}} = -166.70\ \mathrm{kJ\,mol^{-1}}
-$$
-
-The included MACE-OFF23 (medium) calculation predicts:
-
-$$
-\Delta_r H^\circ_{\mathrm{MACE}} = -173.35\ \mathrm{kJ\,mol^{-1}}
-$$
-
-The deviation from the experimental reference is:
-
-$$
-\left|\Delta_r H^\circ_{\mathrm{MACE}} - \Delta_r H^\circ_{\mathrm{exp}}\right| = 6.65\ \mathrm{kJ\,mol^{-1}}
-$$
-
-This corresponds to approximately 4.0% of the experimental reaction enthalpy.
-
-## Electronic energy contribution
-
-The calculated electronic reaction energy is:
-
-$$
-\Delta E_{\mathrm{elec}} = -192.17\ \mathrm{kJ\,mol^{-1}}
-$$
-
-This contribution reflects the energetic changes associated with the reorganization of the π-bond system and formation of two new C–C σ bonds.
-
-The MACE-OFF23 model is based on a high-level organic-molecule training domain that includes reference calculations using ωB97M-D3(BJ)/def2-TZVPPD.
-
-The exercise also compares this result with the electronic energy obtained using GFN2-xTB:
-
-$$
-\Delta E_{\mathrm{elec}}^{\mathrm{xTB}} = -282.18\ \mathrm{kJ\,mol^{-1}}
-$$
-
-This comparison illustrates how different computational approximations can produce substantially different electronic reaction energies.
-
-## Zero-point energy contribution
-
-The zero-point energy correction is:
-
-$$
-\Delta\mathrm{ZPE} = +26.97\ \mathrm{kJ\,mol^{-1}}
-$$
-
-The correction reflects the change in vibrational zero-point energy when two reactant molecules form a single cyclic product.
-
-The formation of the ring changes the number and character of the vibrational modes, particularly the low-frequency molecular motions associated with translation, rotation, and ring deformation.
-
-After the zero-point energy correction, the calculated reaction energy at 0 K is:
-
-$$
-\Delta E_{0K} = -165.20\ \mathrm{kJ\,mol^{-1}}
-$$
-
-## Thermal enthalpy contribution
-
-The thermal contribution between 0 and 298.15 K is:
-
-$$
-\Delta H_{\mathrm{thermal}} = -8.15\ \mathrm{kJ\,mol^{-1}}
-$$
-
-This contribution includes the changes in translational, rotational, and vibrational enthalpy associated with the conversion of two gas-phase molecules into one product molecule.
-
-Combining the electronic, zero-point, and thermal contributions gives:
-
-$$
-\Delta_r H^\circ(298.15\ \mathrm{K}) = \Delta E_{\mathrm{elec}} + \Delta\mathrm{ZPE} + \Delta H_{\mathrm{thermal}} = -192.17 + 26.97 - 8.15 = -173.35\ \mathrm{kJ\,mol^{-1}}
-$$
-
-## Structural analysis: C=C bond lengths
-
-The optimized molecular structures provide additional information about the electronic structure of the reactants and product.
-
-The calculated C=C bond lengths are:
-
-| Molecule | C=C bond length (Å) |
-| --- | --- |
-| 1,3-Butadiene | 1.3278 |
-| Cyclohexene | 1.3268 |
-| Ethene | 1.3222 |
-
-The slightly elongated C=C bond in 1,3-butadiene is associated with π-electron conjugation across the carbon framework.
-
-The comparison illustrates how molecular geometry reflects differences in electronic delocalization.
-
-## Execution
-
-Run the calculation using:
-
-```bash
-python diels-alder-mace.py
