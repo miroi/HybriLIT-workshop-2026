@@ -13,7 +13,7 @@ The main objective is to calculate the reaction enthalpy using different computa
 The reaction is:
 
 $$
-\mathrm{C_4H_6(g)+C_2H_4(g)\rightarrow C_6H_{10}(g)}
+\mathrm{C_4H_6(g)} + \mathrm{C_2H_4(g)} \rightarrow \mathrm{C_6H_{10}(g)}
 $$
 
 where 1,3-butadiene reacts with ethene to produce cyclohexene.
@@ -21,9 +21,7 @@ where 1,3-butadiene reacts with ethene to produce cyclohexene.
 The experimental gas-phase reaction enthalpy at 298.15 K used as the reference is:
 
 $$
-\Delta_r H^\circ_{\mathrm{exp}}
-=
--166.70\ \mathrm{kJ\,mol^{-1}}
+\Delta_r H^\circ_{\mathrm{exp}} = -166.70\ \mathrm{kJ\,mol^{-1}}
 $$
 
 ## Computational approaches
@@ -31,8 +29,6 @@ $$
 The reaction is investigated using two computational methods.
 
 ### 1. MACE-OFF23
-
-[`mace-ase/`](mace-ase/README.md)
 
 The MACE-OFF23 machine-learning interatomic potential is used to calculate the molecular energies, optimize the molecular geometries, and evaluate the reaction enthalpy.
 
@@ -45,8 +41,6 @@ The analysis includes:
 - Comparison with the experimental reaction enthalpy.
 
 ### 2. MOPAC PM7
-
-[`mopac-ase/`](mopac-ase/README.md)
 
 The semi-empirical PM7 method is used to calculate the heats of formation of the reactants and product.
 
@@ -86,4 +80,3 @@ By completing this exercise, participants should understand:
 - The importance of zero-point and thermal corrections.
 - The relationship between molecular geometry and chemical bonding.
 - The strengths and limitations of machine-learning and semi-empirical methods in reaction thermochemistry.
-
