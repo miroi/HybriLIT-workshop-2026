@@ -1,29 +1,94 @@
-# Methane Combustion Enthalpy Calculation with NWChem
+# Methane Combustion Enthalpy Using NWChem's DFT
 
-The `NWChem` `B3LYP/6-311++G**` run completed cleanly with near-exact equilibrium bond lengths (within $0.004\text{ \AA}$ of experiment across all four molecules) and $\Delta_c H^\circ(298\text{ K}) = -750.51\text{ kJ/mol}$.
+## Objective
 
-## Physical Breakdown of the NWChem `B3LYP/6-311++G**` Results
+This exercise calculates the gas-phase combustion enthalpy of methane using density functional theory (DFT) as implemented in **NWChem**.
 
-- **Benchmark-Grade Geometries:**
-  - **$\text{O=O}$ in triplet $\text{O}_2$:** $1.2062\text{ \AA}$ vs. $1.208\text{ \AA}$ expt ($-0.0018\text{ \AA}$).
-  - **$\text{C=O}$ in $\text{CO}_2$:** $1.1608\text{ \AA}$ vs. $1.160\text{ \AA}$ expt ($+0.0008\text{ \AA}$).
-  - **$\text{C–H}$ in $\text{CH}_4$ / $\text{O–H}$ in $\text{H}_2\text{O}$:** $1.0908\text{ \AA}$ and $0.9621\text{ \AA}$ (both within $0.004\text{ \AA}$ of experiment).
+The calculation employs the B3LYP exchange-correlation functional and the 6-311++G** basis set.
 
-- **Why `B3LYP/6-311++G**` Gives $-750.51\text{ kJ/mol}$ vs. $-802.30\text{ kJ/mol}$ Expt:**
-  - Even with hybrid exchange ($20\%$ Hartree–Fock in B3LYP), combustion reactions break a spin-triplet $\text{O=O}$ double bond ($2\text{ mol}$ of $\text{O}_2$) and form four polar $\text{C=O}/\text{O–H}$ bonds—changing both spin multiplicity and electron-pair correlation across every bond.
-  - In standard B3LYP/triple-zeta DFT, differential correlation error between open-shell triplet $\text{O}_2$ and closed-shell $\text{CO}_2/\text{H}_2\text{O}$ (alongside basis-set incompleteness toward the CBS limit, requiring tight $d/f$ polarization functions on C and O) leaves a well-documented $\sim 45\text{–}50\text{ kJ/mol}$ systematic offset on hydrocarbon combustion enthalpies—matching published `B3LYP/6-311++G(d,p)` literature values ($-750\text{ to }-753\text{ kJ/mol}$).
-# Methane Combustion Enthalpy Calculation with NWChem
+The purpose is to investigate the performance of a conventional hybrid-DFT approach in predicting molecular geometries and reaction thermochemistry.
 
-The `NWChem` `B3LYP/6-311++G**` run completed cleanly with near-exact equilibrium bond lengths (within $0.004\text{ \AA}$ of experiment across all four molecules) and $\Delta_c H^\circ(298\text{ K}) = -750.51\text{ kJ/mol}$.
+## Chemical reaction
 
-## Physical Breakdown of the NWChem `B3LYP/6-311++G**` Results
+The reaction is:
 
-- **Benchmark-Grade Geometries:**
-  - **$\text{O=O}$ in triplet $\text{O}_2$:** $1.2062\text{ \AA}$ vs. $1.208\text{ \AA}$ expt ($-0.0018\text{ \AA}$).
-  - **$\text{C=O}$ in $\text{CO}_2$:** $1.1608\text{ \AA}$ vs. $1.160\text{ \AA}$ expt ($+0.0008\text{ \AA}$).
-  - **$\text{C–H}$ in $\text{CH}_4$ / $\text{O–H}$ in $\text{H}_2\text{O}$:** $1.0908\text{ \AA}$ and $0.9621\text{ \AA}$ (both within $0.004\text{ \AA}$ of experiment).
+$$
+\mathrm{CH_4(g)+2O_2(g)\rightarrow CO_2(g)+2H_2O(g)}
+$$
 
-- **Why `B3LYP/6-311++G**` Gives $-750.51\text{ kJ/mol}$ vs. $-802.30\text{ kJ/mol}$ Expt:**
-  - Even with hybrid exchange ($20\%$ Hartree–Fock in B3LYP), combustion reactions break a spin-triplet $\text{O=O}$ double bond ($2\text{ mol}$ of $\text{O}_2$) and form four polar $\text{C=O}/\text{O–H}$ bonds—changing both spin multiplicity and electron-pair correlation across every bond.
-  - In standard B3LYP/triple-zeta DFT, differential correlation error between open-shell triplet $\text{O}_2$ and closed-shell $\text{CO}_2/\text{H}_2\text{O}$ (alongside basis-set incompleteness toward the CBS limit, requiring tight $d/f$ polarization functions on C and O) leaves a well-documented $\sim 45\text{–}50\text{ kJ/mol}$ systematic offset on hydrocarbon combustion enthalpies—matching published `B3LYP/6-311++G(d,p)` literature values ($-750\text{ to }-753\text{ kJ/mol}$).
+The experimental gas-phase reaction enthalpy at 298.15 K is:
+
+$$
+\Delta_c H^\circ_{\mathrm{exp}}
+=
+-802.30\ \mathrm{kJ\,mol^{-1}}
+$$
+
+## Computational methodology
+
+The calculations are performed using:
+
+- **Electronic-structure program:** NWChem.
+- **Exchange-correlation functional:** B3LYP.
+- **Basis set:** 6-311++G**.
+- **Molecular oxygen:** Triplet electronic state.
+
+The molecular energies and geometries are used to evaluate the reaction enthalpy.
+
+## Reference results
+
+The included NWChem calculation reports:
+
+$$
+\Delta_c H^\circ(298.15\,\mathrm{K})
+=
+-750.51\ \mathrm{kJ\,mol^{-1}}
+$$
+
+This differs from the experimental reference by approximately 51.8 kJ mol⁻¹.
+
+The optimized geometries show good agreement with the cited experimental bond lengths:
+
+| Molecule | Bond | Calculated distance (Å) | Experimental reference (Å) |
+|---|---|---:|---:|
+| O₂ (triplet) | O=O | 1.2062 | 1.208 |
+| CO₂ | C=O | 1.1608 | 1.160 |
+| CH₄ | C–H | 1.0908 | — |
+| H₂O | O–H | 0.9621 | — |
+
+The calculated bond lengths are close to the corresponding experimental values.
+
+## Discussion of thermochemical accuracy
+
+The results illustrate an important distinction between geometrical accuracy and reaction-energy accuracy.
+
+Although B3LYP/6-311++G** provides good equilibrium geometries, the calculated combustion enthalpy differs appreciably from the experimental value.
+
+The combustion reaction involves the conversion of open-shell triplet O₂ into closed-shell molecular products. Consequently, differences in the description of electron correlation between reactants and products can affect the final reaction energy.
+
+Basis-set incompleteness can also contribute to the remaining discrepancy.
+
+The results therefore provide a useful example of why agreement in equilibrium molecular structures does not necessarily guarantee comparable accuracy in reaction thermochemistry.
+
+## Execution
+
+Run the calculation using:
+
+```bash
+python methane_combustion_nwchem.py
+```
+
+NWChem must be installed and accessible to the ASE calculator.
+
+The saved logfile contains the output of the reference calculation.
+
+## Learning outcomes
+
+This exercise demonstrates:
+
+- The application of hybrid DFT to molecular reaction energetics.
+- The importance of choosing the correct electronic state.
+- The influence of electron-correlation and basis-set errors.
+- The distinction between geometrical and thermochemical accuracy.
+- The comparison of DFT predictions with experimental thermochemical data.
 

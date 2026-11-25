@@ -1,11 +1,9 @@
 title "check_nwchem_h2o"
 
-permanent_dir /home/milias/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_01/check-nwchem-ase/check_nwchem_h2o
-
-scratch_dir /home/milias/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_01/check-nwchem-ase/check_nwchem_h2o
+#permanent_dir /home/milias/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_01/check-nwchem-ase/check_nwchem_h2o
+#scratch_dir /home/milias/work/projects/schools/Molecular-and-Materials-Modeling-2026-November/exercise_01/check-nwchem-ase/check_nwchem_h2o
 
 start check_nwchem_h2o
-
 
 
 geometry units angstrom nocenter noautosym noautoz

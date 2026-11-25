@@ -1,20 +1,101 @@
-# Methane Combustion with MACE
 
-Because standard **MACE-OFF23** is parameterized strictly for closed-shell singlet organic molecules and has no spin-state awareness for ground-state triplet $\text{O}_2$, this script uses the universal foundation model `mace_mp` (which covers the periodic table, supports D3 dispersion, and is trained on spin-polarized Materials Project PBE/PBE+U calculations where ground-state $\text{O}_2$ is naturally a triplet) while passing `spin=1` for $\text{O}_2$ into `IdealGasThermo`.
+# Methane Combustion Enthalpy Using MACE and ASE
 
-## Important Pedagogical Note for `exercise_02`
+## Objective
 
-- **Why `mace_mp` is used here instead of `mace_off`:** `MACE-OFF23` was trained exclusively on closed-shell singlet organic molecules (`SPICE` / `QM7-X`), so it has no representation of open-shell triplet $\text{O}_2$ ($^3\Sigma_g^-$). By contrast, `MACE-MP-0` is trained on spin-polarized VASP PBE/PBE+U calculations from the Materials Project, where gas-phase $\text{O}_2$ was converged in its triplet ground state.
-- **Known PBE $\text{O}_2$ overbinding:** Because `MACE-MP-0` inherits the underlying GGA PBE potential energy surface—which famously overbinds the $\text{O}_2$ double bond by $\sim 0.4\text{ eV}$ per $\text{O}_2$ molecule (the same error that requires Wang–Maxisch–Ceder $\text{O}_2$ corrections in Materials Project phase diagrams)—the predicted $\Delta_c H^\circ(298\text{ K})$ reflects that PBE $\text{O}_2$ bias rather than matching experiment as closely as `MACE-OFF23` did for closed-shell ethene hydrogenation.
+This exercise calculates the gas-phase combustion enthalpy of methane using the **MACE-MP-0 machine-learning interatomic potential** and the Atomic Simulation Environment (ASE).
 
-## Physical Breakdown of the `MACE-MP-0` Results
+The main objective is to evaluate how a machine-learning potential trained on density-functional-theory reference data describes a chemical reaction involving both closed-shell molecules and open-shell molecular oxygen.
 
-The `MACE-MP-0 (medium) + D3` run produces $\Delta_c H^\circ(298\text{ K}) = -743.24\text{ kJ/mol}$—landing within $59\text{ kJ/mol}$ ($7.4\%$) of the experimental gas-phase value ($-802.30\text{ kJ/mol}$) and faithfully reproducing the underlying GGA PBE potential energy surface:
+## Choice of MACE model
 
-1. **Exact Inheritance of PBE $\text{O}_2$ Overbinding:**
-   - In VASP PBE DFT (the exact training level of `MACE-MP-0`), the $\text{O=O}$ bond length of triplet $\text{O}_2$ is $1.234\text{ \AA}$ (MACE result: $1.2366\text{ \AA}$), and PBE overbinds the $\text{O}_2$ molecule by $\sim 0.30\text{–}0.35\text{ eV}$ ($\sim 30\text{ kJ/mol}$) per $\text{O}_2$.
-   - Because $2\text{ mol}$ of $\text{O}_2$ appear on the reactant side, that $2 \times 30\text{ kJ/mol} \approx 60\text{ kJ/mol}$ over-stabilization of the reactants shifts $\Delta_c H^\circ(298\text{ K})$ upward from $-802.30\text{ kJ/mol}$ to $-743.24\text{ kJ/mol}$—matching raw PBE DFT ($\approx -745\text{ kJ/mol}$) to within $2\text{ kJ/mol}$.
+The calculation uses the `mace_mp` model rather than MACE-OFF23.
 
-2. **Accurate Zero-Point & Thermal Corrections:**
-   - The harmonic $\Delta\text{ZPE} = +8.83\text{ kJ/mol}$ matches both `GFN2-xTB` ($+8.74\text{ kJ/mol}$) and full DFT ($\approx +9\text{ kJ/mol}$), with clean degenerate bending modes in $\text{CO}_2$ ($710.2, 710.2\text{ cm}^{-1}$) and triply degenerate modes in $\text{CH}_4$ ($1194.2\text{ cm}^{-1}$ and $3147.3\text{ cm}^{-1}$).
+This choice is important because molecular oxygen has a triplet ground state:
+
+$$
+\mathrm{O_2}: \quad {}^3\Sigma_g^-
+$$
+
+Standard MACE-OFF23 is designed for closed-shell organic molecules and does not provide the spin-state treatment required for this oxygen reference.
+
+MACE-MP-0, in contrast, is based on spin-polarized PBE/PBE+U calculations from the Materials Project dataset. The triplet state of O₂ is therefore more appropriately represented within the model's underlying training framework.
+
+The calculation also specifies the appropriate spin multiplicity for O₂ when using ASE's `IdealGasThermo` thermochemistry implementation.
+
+## Computational workflow
+
+The Python script
+
+```text
+methane_combustion_mace.py
+```
+
+performs the calculations required to evaluate the combustion reaction.
+
+The thermochemical analysis considers:
+
+- Molecular energies of the reactants and products.
+- Equilibrium molecular geometries.
+- Vibrational frequencies.
+- Zero-point energy corrections.
+- Thermal contributions to the enthalpy.
+
+The calculated reaction enthalpy is compared with the experimental gas-phase reference value.
+
+## Reference result
+
+The included MACE-MP-0 (medium) calculation gives:
+
+$$
+\Delta_c H^\circ(298.15\,\mathrm{K})
+=
+-743.24\ \mathrm{kJ\,mol^{-1}}
+$$
+
+The experimental reference is:
+
+$$
+\Delta_c H^\circ_{\mathrm{exp}}
+=
+-802.30\ \mathrm{kJ\,mol^{-1}}
+$$
+
+The difference is approximately 59 kJ mol⁻¹, corresponding to about 7.4% of the experimental value.
+
+## Interpretation of the results
+
+An important contribution to this discrepancy is the known tendency of the underlying PBE approximation to overbind molecular oxygen.
+
+Because two O₂ molecules occur on the reactant side of the combustion reaction, errors in the oxygen reference energy can have a substantial effect on the calculated reaction enthalpy.
+
+The included analysis discusses the relationship between the MACE-MP-0 prediction and the corresponding PBE electronic-structure description.
+
+The harmonic zero-point energy correction reported in the calculation is:
+
+$$
+\Delta\mathrm{ZPE}=+8.83\ \mathrm{kJ\,mol^{-1}}
+$$
+
+The vibrational analysis also provides an opportunity to examine molecular symmetry and the degeneracy of vibrational modes in CO₂ and CH₄.
+
+## Execution
+
+Run the calculation using:
+
+```bash
+python methane_combustion_mace.py
+```
+
+The script requires ASE and the MACE package, together with the corresponding model checkpoint.
+
+## Learning outcomes
+
+This exercise demonstrates:
+
+- The use of machine-learning potentials for molecular thermochemistry.
+- The importance of electronic spin states in reaction-energy calculations.
+- The relationship between training data and model accuracy.
+- The contribution of vibrational and thermal corrections to reaction enthalpies.
+- The limitations of transferring a computational model between different classes of molecular systems.
 
