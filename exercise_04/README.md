@@ -49,9 +49,9 @@ $$
 The tensor is defined as the second derivative of the molecular energy with respect to the external magnetic field:
 
 $$
-\chi_{\alpha\beta} =
-\left. \frac{\partial^2 E(\mathbf{B})}
-{\partial B_\alpha \partial B_\beta} \right|_{\mathbf{B}=\mathbf{0}}
+\chi_{\alpha\beta}
+= \left. \frac{\partial^2 E(\mathbf{B})}
+{\partial B_\alpha \,\partial B_\beta} \right|_{\mathbf{B}=\mathbf{0}}
 $$
 
 Two useful quantities derived from the tensor are the isotropic magnetizability and the magnetizability anisotropy.
@@ -75,7 +75,7 @@ These quantities describe the average magnetic response and its dependence on th
 The included PySCF calculation gives the following results:
 
 | Property | PySCF (B3LYP/aug-cc-pVTZ) | Experimental reference |
-|---|---|---|
+| --- | --- | --- |
 | H–H equilibrium bond length (Å) | 0.7429 | 0.7414 |
 | Isotropic magnetizability (a.u.) | −0.8582 | −0.847 |
 | Isotropic magnetizability (SI) (J/T²) | −6.77 × 10⁻²⁹ | −6.68 × 10⁻²⁹ |
