@@ -1,4 +1,3 @@
-
 # Exercise 04 — Molecular Magnetizability of H₂
 
 ## Objective
@@ -15,11 +14,11 @@ Molecular hydrogen is used as a simple closed-shell system for exploring these p
 
 The calculation is performed using:
 
-- **Electronic-structure program:** PySCF
-- **Geometry optimization:** ASE with the BFGS optimizer
-- **Exchange-correlation functional:** B3LYP
-- **Basis set:** aug-cc-pVTZ
-- **Magnetic-response method:** Gauge-Including Atomic Orbitals (GIAO)
+- Electronic-structure program: PySCF
+- Geometry optimization: ASE with the BFGS optimizer
+- Exchange-correlation functional: B3LYP
+- Basis set: aug-cc-pVTZ
+- Magnetic-response method: Gauge-Including Atomic Orbitals (GIAO)
 
 The Python script `magnetizability_h2_pyscf.py` performs two main computational steps.
 
@@ -30,7 +29,7 @@ The equilibrium geometry of H₂ is optimized using the ASE BFGS algorithm.
 The maximum-force convergence criterion is:
 
 $$
-f_{\max} = 0.001\ \mathrm{eV\,\AA^{-1}}
+f_{\max} = 0.001\ \mathrm{eV}\,\mathrm{\mathring{A}}^{-1}
 $$
 
 A custom ASE calculator provides the molecular energies and forces through PySCF using restricted Kohn–Sham DFT at the B3LYP/aug-cc-pVTZ level.
@@ -44,22 +43,15 @@ After geometry optimization, the magnetizability tensor is calculated analytical
 The total magnetizability tensor contains diamagnetic and paramagnetic contributions:
 
 $$
-\boldsymbol{\chi}
-=
-\boldsymbol{\chi}^{d}
-+
-\boldsymbol{\chi}^{p}
+\boldsymbol{\chi} = \boldsymbol{\chi}^{d} + \boldsymbol{\chi}^{p}
 $$
 
 The tensor is defined as the second derivative of the molecular energy with respect to the external magnetic field:
 
 $$
-\chi_{\alpha\beta}
-=
-\left.
-\frac{\partial^2 E(\mathbf{B})}
-{\partial B_\alpha\,\partial B_\beta}
-\right|_{\mathbf{B}=\mathbf{0}}
+\chi_{\alpha\beta} =
+\left. \frac{\partial^2 E(\mathbf{B})}
+{\partial B_\alpha \partial B_\beta} \right|_{\mathbf{B}=\mathbf{0}}
 $$
 
 Two useful quantities derived from the tensor are the isotropic magnetizability and the magnetizability anisotropy.
@@ -67,19 +59,13 @@ Two useful quantities derived from the tensor are the isotropic magnetizability 
 The isotropic magnetizability is:
 
 $$
-\chi_{\mathrm{iso}}
-=
-\frac{1}{3}\operatorname{Tr}(\boldsymbol{\chi})
+\chi_{\mathrm{iso}} = \frac{1}{3}\operatorname{Tr}(\boldsymbol{\chi})
 $$
 
 The magnetizability anisotropy is:
 
 $$
-\Delta\chi
-=
-\chi_{\parallel}
--
-\chi_{\perp}
+\Delta\chi = \chi_{\parallel} - \chi_{\perp}
 $$
 
 These quantities describe the average magnetic response and its dependence on the orientation of the molecule relative to the applied magnetic field.
@@ -89,7 +75,7 @@ These quantities describe the average magnetic response and its dependence on th
 The included PySCF calculation gives the following results:
 
 | Property | PySCF (B3LYP/aug-cc-pVTZ) | Experimental reference |
-|:---|---:|---:|
+|---|---|---|
 | H–H equilibrium bond length (Å) | 0.7429 | 0.7414 |
 | Isotropic magnetizability (a.u.) | −0.8582 | −0.847 |
 | Isotropic magnetizability (SI) (J/T²) | −6.77 × 10⁻²⁹ | −6.68 × 10⁻²⁹ |
@@ -109,9 +95,7 @@ The magnetizability is reported in atomic units and SI units.
 The atomic unit used in the calculation is:
 
 $$
-1\ \mathrm{a.u.}
-=
-\frac{e^2 a_0^2}{m_e}
+1\ \mathrm{a.u.} = \frac{e^2 a_0^2}{m_e}
 $$
 
 The calculation also reports the molar magnetic susceptibility in cgs units, allowing comparison with experimental molecular magnetic data.
@@ -123,29 +107,3 @@ Install the required Python packages:
 ```bash
 conda install -c conda-forge ase pyscf
 pip install pyscf-properties
-```
-
-Run the calculation using:
-
-```bash
-python magnetizability_h2_pyscf.py
-```
-
-The script performs the geometry optimization and subsequent magnetic-response calculation.
-
-A saved logfile is included for reference.
-
-## Learning outcomes
-
-After completing this exercise, you should be able to:
-
-- Perform geometry optimization using ASE and PySCF.
-- Carry out density functional theory calculations for molecular systems.
-- Explain the Gauge-Including Atomic Orbital (GIAO) method and its application to magnetic-response calculations.
-- Calculate and interpret molecular magnetizability tensors.
-- Distinguish diamagnetic and paramagnetic contributions to magnetic response.
-- Calculate isotropic magnetizability and magnetic anisotropy.
-- Compare calculated molecular magnetic properties with experimental reference data.
-
-The exercise provides an introduction to molecular magnetic-response calculations and illustrates how quantum-chemical methods can be used to investigate properties beyond conventional molecular energies and geometries.
-
