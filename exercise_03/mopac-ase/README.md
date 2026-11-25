@@ -35,10 +35,7 @@ The calculations provide the heats of formation of:
 The reaction enthalpy is evaluated according to Hess's law:
 
 $$
-\Delta_r H^\circ
-= \Delta_f H^\circ(\mathrm{C_6H_{10}})
-- \Delta_f H^\circ(\mathrm{C_4H_6})
-- \Delta_f H^\circ(\mathrm{C_2H_4})
+\Delta_r H^\circ = \Delta_f H^\circ(\mathrm{C_6H_{10}}) - \Delta_f H^\circ(\mathrm{C_4H_6}) - \Delta_f H^\circ(\mathrm{C_2H_4})
 $$
 
 ## Reference results
