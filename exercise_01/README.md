@@ -15,7 +15,16 @@ The calculations are performed through the **Atomic Simulation Environment (ASE)
 
 ## Tasks
 
-Repeat the installation checks demonstrated in the workshop recording.
+First, activate the workshop conda environment before running the checks.
+
+Conda management system:
+
+```bash
+conda create -n mace_env
+conda activate mace_env
+conda install -c conda-forge ase mopac nwchem pyscf
+pip install torch mace-torch
+
 
 ### 1. MACE–ASE
 
