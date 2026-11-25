@@ -59,7 +59,7 @@ Two useful quantities derived from the tensor are the isotropic magnetizability 
 The isotropic magnetizability is:
 
 $$
-\chi_{\mathrm{iso}} = \frac{1}{3}\operatorname{Tr}(\boldsymbol{\chi})
+\chi_{\mathrm{iso}} = \frac{1}{3}\mathrm{Tr}(\boldsymbol{\chi})
 $$
 
 The magnetizability anisotropy is:
