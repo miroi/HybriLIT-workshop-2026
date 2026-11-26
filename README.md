@@ -1,5 +1,5 @@
 
-# HybriLIT Workshop 2026 — Computational Chemistry Exercises
+# HybriLIT Workshop 2026 — Computational Molecular Physics (Computational Chemistry) Exercises
 
 This repository contains a collection of hands-on exercises developed for the **HybriLIT Workshop 2026**. The exercises introduce computational approaches to molecular modelling, thermochemistry, chemical reactions, and molecular magnetic properties.
 
